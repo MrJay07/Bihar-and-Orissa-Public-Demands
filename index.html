@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bihar and Orissa Public Demands Recovery Act, 1914 Quiz</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for better aesthetics */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">
+            Bihar and Orissa Public Demands Recovery Act, 1914 Quiz
+        </h1>
+
+        <div id="quiz-container">
+            <!-- Question counter -->
+            <div id="question-counter" class="text-lg text-gray-700 mb-4"></div>
+
+            <!-- Question text -->
+            <h2 id="question-text" class="text-2xl font-semibold text-gray-900 mb-6"></h2>
+
+            <!-- Options container -->
+            <div id="options-container" class="space-y-3 mb-6">
+                <!-- Options will be dynamically inserted here -->
+            </div>
+
+            <!-- Result message -->
+            <div id="result-message" class="mt-4 p-4 rounded-md text-center hidden"></div>
+
+            <!-- Navigation button -->
+            <div class="mt-6 flex justify-center">
+                <button id="next-question-btn" class="px-6 py-3 rounded-md text-white font-semibold transition-colors duration-200 bg-blue-400 cursor-not-allowed" disabled>
+                    Next Question
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz completed screen -->
+        <div id="quiz-completed-screen" class="hidden text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Quiz Completed!</h2>
+            <p id="final-score" class="text-xl text-gray-700 mb-6"></p>
+            <button id="restart-quiz-btn" class="px-6 py-3 bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700 transition-colors duration-200">
+                Restart Quiz
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Define the quiz questions and answers
+        const quizQuestions = [
+            {
+                question: "The Bihar and Orissa Public Demands Recovery Act, 1914 extends to which of the following areas?",
+                options: [
+                    "Whole of Bihar and Orissa including Angul and Sambalpur districts",
+                    "Whole of Bihar and Orissa except Angul and Sambalpur districts",
+                    "Only Bihar state",
+                    "Only Orissa state"
+                ],
+                answer: "Whole of Bihar and Orissa except Angul and Sambalpur districts"
+            },
+            {
+                question: "Which of the following best defines a \"Certificate Officer\" under the Act?",
+                options: [
+                    "Any government official",
+                    "Collector, Sub-Divisional Officer, or an officer appointed by Collector with Commissioner's sanction",
+                    "Only the Collector",
+                    "Any District Court Judge"
+                ],
+                answer: "Collector, Sub-Divisional Officer, or an officer appointed by Collector with Commissioner's sanction"
+            },
+            {
+                question: "The term \"Public Demand\" as per the Act includes:",
+                options: [
+                    "Only arrears of land revenue",
+                    "Any arrear or money mentioned in Schedule I, including interest till certificate date",
+                    "Salaries payable to government officers",
+                    "None of the above"
+                ],
+                answer: "Any arrear or money mentioned in Schedule I, including interest till certificate date"
+            },
+            {
+                question: "Who may sign a certificate stating that a public demand payable to the Collector is due?",
+                options: [
+                    "Any government officer",
+                    "Certificate Officer satisfied the demand is due",
+                    "The certificate debtor",
+                    "Civil Court Judge"
+                ],
+                answer: "Certificate Officer satisfied the demand is due"
+            },
+            {
+                question: "Within how many days can a certificate debtor file a petition denying liability after receiving notice?",
+                options: [
+                    "15 days",
+                    "30 days",
+                    "45 days",
+                    "60 days"
+                ],
+                answer: "30 days"
+            },
+            {
+                question: "Which of the following properties is NOT liable to attachment and sale under the Act?",
+                options: [
+                    "Movable property belonging to certificate debtor",
+                    "Necessary wearing apparel of the certificate debtor's family",
+                    "Shares owned by certificate debtor",
+                    "Immovable property in revenue-paying estate"
+                ],
+                answer: "Necessary wearing apparel of the certificate debtor's family"
+            },
+            {
+                question: "Maximum period of detention in civil prison for a certificate debtor when the demand exceeds fifty rupees:",
+                options: [
+                    "3 months",
+                    "6 months",
+                    "1 year",
+                    "6 weeks"
+                ],
+                answer: "6 months"
+            },
+            {
+                question: "Who has the power to revise an order passed by a Collector under the Act?",
+                options: [
+                    "Certificate Officer",
+                    "Commissioner",
+                    "Board of Revenue",
+                    "State Government"
+                ],
+                answer: "Board of Revenue"
+            },
+            {
+                question: "Who may make rules regulating procedures under this Act?",
+                options: [
+                    "State Government",
+                    "Board of Revenue",
+                    "Collector",
+                    "Certificate Officer"
+                ],
+                answer: "Board of Revenue"
+            },
+            {
+                question: "Execution of a certificate can start:",
+                options: [
+                    "Immediately upon filing certificate",
+                    "After 30 days from service of notice unless a petition is filed",
+                    "After 60 days from filing certificate",
+                    "None of the above"
+                ],
+                answer: "After 30 days from service of notice unless a petition is filed"
+            },
+            {
+                question: "Effect of notice of certificate on certificate-debtor includes:",
+                options: [
+                    "Any transfer of immovable property is void against claims enforceable in execution",
+                    "Certificate debtor gets ownership of property",
+                    "Property is immune from attachment",
+                    "Certificate debtor is immediately arrested"
+                ],
+                answer: "Any transfer of immovable property is void against claims enforceable in execution"
+            },
+            {
+                question: "Who is subject to the general supervision and control of the Collector under the Act?",
+                options: [
+                    "All officers",
+                    "Certificate Officers (not being Collectors), Assistant Collectors, and Deputy Collectors",
+                    "Only Certificate Officers",
+                    "Only Deputy Collectors"
+                ],
+                answer: "Certificate Officers (not being Collectors), Assistant Collectors, and Deputy Collectors"
+            },
+            {
+                question: "Who may be arrested in execution of a certificate under the Act?",
+                options: [
+                    "Anyone suspected of owing money",
+                    "Only certificate-debtor",
+                    "Any government officer",
+                    "Civil Court Judge"
+                ],
+                answer: "Only certificate-debtor"
+            },
+            {
+                question: "The Civil Court may:",
+                options: [
+                    "Cancel or modify a certificate on specific grounds",
+                    "Cannot entertain any suits regarding certificates",
+                    "Directly execute certificates",
+                    "Automatically approve all certificates"
+                ],
+                answer: "Cancel or modify a certificate on specific grounds"
+            },
+            {
+                question: "One ground for cancellation of a certificate by a Civil Court:",
+                options: [
+                    "The amount stated was actually paid before signing",
+                    "Certificate debtor refused notice",
+                    "Certificate holder delayed filing",
+                    "None of the above"
+                ],
+                answer: "The amount stated was actually paid before signing"
+            },
+            {
+                question: "By what methods can execution of a certificate be ordered?",
+                options: [
+                    "Attachment and sale of property",
+                    "Arrest and detention in civil prison",
+                    "Both a and b",
+                    "None of the above"
+                ],
+                answer: "Both a and b"
+            },
+            {
+                question: "Which property is exempt from sale in execution if owned by an agriculturist?",
+                options: [
+                    "Tools of artisans",
+                    "Implements of husbandry",
+                    "Necessary seed grain and cattle",
+                    "All of the above"
+                ],
+                answer: "All of the above"
+            },
+            {
+                question: "What is the effect of a sale of immovable property in execution becoming absolute?",
+                options: [
+                    "Purchaser immediately gets ownership",
+                    "Purchaser's right, title, and interest vest from time of sale",
+                    "Sale can be revoked at any time",
+                    "None of the above"
+                ],
+                answer: "Purchaser's right, title, and interest vest from time of sale"
+            },
+            {
+                question: "What can a purchaser do if obstructed from possession after execution sale?",
+                options: [
+                    "Apply to Collector",
+                    "Apply to Certificate Officer",
+                    "File suit in Civil Court",
+                    "Appeal to Commissioner"
+                ],
+                answer: "Apply to Certificate Officer"
+            },
+            {
+                question: "To set aside a sale of immovable property within 30 days, the applicant must deposit:",
+                options: [
+                    "Amount of certificate only",
+                    "Amount with interest and penalty",
+                    "Penalty only",
+                    "None of the above"
+                ],
+                answer: "Amount with interest and penalty"
+            },
+            {
+                question: "When may a Certificate Officer order pre-30-day attachment of movable property?",
+                options: [
+                    "If certificate debtor likely to conceal or dispose property",
+                    "Immediately after filing certificate",
+                    "Only after petition denying liability is disposed",
+                    "None of the above"
+                ],
+                answer: "If certificate debtor likely to conceal or dispose property"
+            },
+            {
+                question: "Who may be detained in civil prison as per the Act?",
+                options: [
+                    "Any person owing debt",
+                    "Certificate debtor",
+                    "Witness refusing to appear",
+                    "Co-certificate holder"
+                ],
+                answer: "Certificate debtor"
+            },
+            {
+                question: "What is the penalty for a certificate debtor who conceals or fraudulently disposes property?",
+                options: [
+                    "Penalty under IPC Section 206",
+                    "Civil Court suit",
+                    "Automatic arrest",
+                    "None of the above"
+                ],
+                answer: "Penalty under IPC Section 206"
+            },
+            {
+                question: "Are women and minors liable to arrest or detention under this Act?",
+                options: [
+                    "Yes",
+                    "No",
+                    "Only women",
+                    "Only minors"
+                ],
+                answer: "No"
+            },
+            {
+                question: "Who may file an appeal against an order made by a Certificate Officer?",
+                options: [
+                    "Collector",
+                    "Certificate debtor",
+                    "Certificate holder",
+                    "Any person"
+                ],
+                answer: "Certificate debtor"
+            },
+            {
+                question: "Within how many months can a certificate debtor bring a suit to have a certificate cancelled or modified?",
+                options: [
+                    "3 months",
+                    "6 months",
+                    "9 months",
+                    "12 months"
+                ],
+                answer: "6 months"
+            },
+            {
+                question: "Which is NOT a ground for cancellation of a certificate by a Civil Court?",
+                options: [
+                    "Amount actually paid before signing",
+                    "No part of the amount was due",
+                    "Certificate debtor refused to pay on time",
+                    "Irregularity in collection of fines causing substantial injury"
+                ],
+                answer: "Certificate debtor refused to pay on time"
+            },
+            {
+                question: "For a Civil Court to entertain a suit about a certificate, what is required?",
+                options: [
+                    "Filing of a petition denying liability",
+                    "Certificate-holder must have filed a suit",
+                    "Suit must be before property sale",
+                    "None of the above"
+                ],
+                answer: "Filing of a petition denying liability"
+            },
+            {
+                question: "If a sale in execution is not set aside within the prescribed period:",
+                options: [
+                    "Sale is automatically invalid",
+                    "Becomes absolute",
+                    "Can be challenged anytime",
+                    "Is null and void"
+                ],
+                answer: "Becomes absolute"
+            },
+            {
+                question: "Suit regarding certificates can be brought in Civil Court-when?",
+                options: [
+                    "If fraud is alleged",
+                    "If sale amount is high",
+                    "On certificate debtor's request",
+                    "On certificate holder's agreement"
+                ],
+                answer: "If fraud is alleged"
+            },
+            {
+                question: "Who may revise an order made by a Collector?",
+                options: [
+                    "Certificate Officer",
+                    "Commissioner",
+                    "Board of Revenue",
+                    "State Government"
+                ],
+                answer: "Board of Revenue"
+            },
+            {
+                question: "Time limit for filing an appeal against Collector's order is:",
+                options: [
+                    "7 days",
+                    "15 days",
+                    "30 days",
+                    "60 days"
+                ],
+                answer: "30 days"
+            },
+            {
+                question: "Can a certificate debtor be re-arrested after release under the Act?",
+                options: [
+                    "Yes, without limitation",
+                    "Yes, but period cannot exceed prescribed limits",
+                    "No",
+                    "Only with Supreme Court approval"
+                ],
+                answer: "Yes, but period cannot exceed prescribed limits"
+            },
+            {
+                question: "Penalty for making a requisition without reasonable cause:",
+                options: [
+                    "Compensation to certificate debtor",
+                    "Cancellation of certificate",
+                    "Imprisonment",
+                    "None"
+                ],
+                answer: "Compensation to certificate debtor"
+            },
+            {
+                question: "Who makes rules regulating the procedure under this Act?",
+                options: [
+                    "State Government",
+                    "Board of Revenue",
+                    "Collector",
+                    "Certificate Officer"
+                ],
+                answer: "Board of Revenue"
+            },
+            {
+                question: "\"Movable property\" under the Act includes:",
+                options: [
+                    "Goods and chattels only",
+                    "Growing crops",
+                    "Immovable property",
+                    "Only cash/securities"
+                ],
+                answer: "Growing crops"
+            },
+            {
+                question: "Who is a \"certificate debtor\"?",
+                options: [
+                    "Person named as debtor in a certificate filed",
+                    "Any government official",
+                    "A registered purchaser",
+                    "Legal representative of certificate holder"
+                ],
+                answer: "Person named as debtor in a certificate filed"
+            },
+            {
+                question: "Upon filing a certificate, the certificate debtor must be served with:",
+                options: [
+                    "Copy of the certificate only",
+                    "Notice in prescribed form and copy of the certificate",
+                    "Verbal notice only",
+                    "No notice"
+                ],
+                answer: "Notice in prescribed form and copy of the certificate"
+            },
+            {
+                question: "Requisition fee for a certificate payable to a non-Collector is:",
+                options: [
+                    "No fee",
+                    "Rs. 25",
+                    "Same as Court-fees Act for plaints",
+                    "Twice the amount due"
+                ],
+                answer: "Same as Court-fees Act for plaints"
+            },
+            {
+                question: "The Certificate Officer may grant release from arrest if:",
+                options: [
+                    "Debtor discloses all property without bad faith",
+                    "Payment of half amount",
+                    "Filing a petition denying liability",
+                    "Personal request"
+                ],
+                answer: "Debtor discloses all property without bad faith"
+            },
+            {
+                question: "Non-service of notice under Section 7 leads to:",
+                options: [
+                    "Certificate is void",
+                    "Certificate debtor can file petition within 30 days from execution",
+                    "Execution cannot start",
+                    "No effect"
+                ],
+                answer: "Certificate debtor can file petition within 30 days from execution"
+            },
+            {
+                question: "Can a Certificate Officer amend a certificate after filing?",
+                options: [
+                    "No",
+                    "Yes, by amendment or substitution of parties (subject to law of limitation)",
+                    "Yes, but only to increase amount claimed",
+                    "Yes, with civil court approval"
+                ],
+                answer: "Yes, by amendment or substitution of parties (subject to law of limitation)"
+            },
+            {
+                question: "Purchaser's rights from sale of tenure under Bengal Tenancy Act, 1885:",
+                options: [
+                    "Full ownership free of all interests",
+                    "Subject to protected interests, with power to annul incumbrances",
+                    "No rights",
+                    "Only possession"
+                ],
+                answer: "Subject to protected interests, with power to annul incumbrances"
+            },
+            {
+                question: "If a certificate debtor dies before full satisfaction of certificate:",
+                options: [
+                    "Certificate becomes void",
+                    "Legal representative liable up to property received",
+                    "Proceedings stop",
+                    "Government cancels certificate"
+                ],
+                answer: "Legal representative liable up to property received"
+            },
+            {
+                question: "Who can be authorized to sign original notices for Certificate Officers?",
+                options: [
+                    "Any person",
+                    "Ministerial officers by written order",
+                    "Only the Collector",
+                    "Certificate debtor"
+                ],
+                answer: "Ministerial officers by written order"
+            },
+            {
+                question: "Who can institute a suit to establish right to possession after an order by Certificate Officer?",
+                options: [
+                    "Only certificate debtor",
+                    "Anyone other than certificate debtor",
+                    "Only certificate holder",
+                    "Only civil court"
+                ],
+                answer: "Anyone other than certificate debtor"
+            },
+            {
+                question: "Effect of not filing petition denying liability on suit right:",
+                options: [
+                    "No effect",
+                    "Suit may be barred unless good reason shown",
+                    "Suit automatically allowed",
+                    "None"
+                ],
+                answer: "Suit may be barred unless good reason shown"
+            },
+            {
+                question: "Collector's supervision covers:",
+                options: [
+                    "No control",
+                    "General supervision and control over non-Collector Certificate Officers, Assistant Collectors, Deputy Collectors",
+                    "Approves all certificates",
+                    "Drafts all petitions"
+                ],
+                answer: "General supervision and control over non-Collector Certificate Officers, Assistant Collectors, Deputy Collectors"
+            },
+            {
+                question: "The appellate authority for Collector's orders:",
+                options: [
+                    "Board of Revenue",
+                    "State Government",
+                    "Commissioner",
+                    "Chief Minister"
+                ],
+                answer: "Commissioner"
+            },
+            {
+                question: "Appeal time limit after Assistant Collector's order:",
+                options: [
+                    "7 days",
+                    "15 days",
+                    "30 days",
+                    "60 days"
+                ],
+                answer: "15 days"
+            },
+            {
+                question: "What may a Certificate Officer do if a requisition is made without reasonable cause?",
+                options: [
+                    "Cancel certificate",
+                    "Award compensation to certificate debtor",
+                    "Order arrest",
+                    "None"
+                ],
+                answer: "Award compensation to certificate debtor"
+            },
+            {
+                question: "Board of Revenue's role re: rules:",
+                options: [
+                    "Makes and amends rules",
+                    "Executes certificates",
+                    "Arrests certificate debtors",
+                    "Acts as Civil Court"
+                ],
+                answer: "Makes and amends rules"
+            },
+            {
+                question: "Who may execute a certificate filed under the Act?",
+                options: [
+                    "Certificate Officer where original is filed",
+                    "Any other Certificate Officer to whom a copy is sent",
+                    "Both a and b",
+                    "Civil Court Judge"
+                ],
+                answer: "Both a and b"
+            },
+            {
+                question: "A certificate is deemed, for purposes of the Limitation Act, to be:",
+                options: [
+                    "A Civil Court decree",
+                    "Informal notice",
+                    "Executive order",
+                    "None"
+                ],
+                answer: "A Civil Court decree"
+            },
+            {
+                question: "Which of the following is NOT exempt from attachment or sale?",
+                options: [
+                    "Books of account",
+                    "Necessary wearing apparel",
+                    "Agricultural land occupied by agriculturist",
+                    "Debts owed to certificate debtor"
+                ],
+                answer: "Debts owed to certificate debtor"
+            },
+            {
+                question: "What amount of interest is recoverable in execution of a certificate?",
+                options: [
+                    "No interest",
+                    "Interest at 12% per annum from certificate signing to realization",
+                    "At prevailing bank rate",
+                    "None"
+                ],
+                answer: "Interest at 12% per annum from certificate signing to realization"
+            },
+            {
+                question: "When is property not liable to attachment for a certificate?",
+                options: [
+                    "When exempt as per the Act",
+                    "If it is future maintenance",
+                    "Personal ornaments as per religion",
+                    "All of the above"
+                ],
+                answer: "All of the above"
+            },
+            {
+                question: "Who can cancel a certificate at the request of the certificate-holder?",
+                options: [
+                    "Collector",
+                    "Certificate Officer",
+                    "State Government",
+                    "Civil Court"
+                ],
+                answer: "Certificate Officer"
+            },
+            {
+                question: "When is a notice and copy of certificate NOT required to be served again?",
+                options: [
+                    "For second execution",
+                    "After amendment of parties",
+                    "Upon transmission to another officer for execution",
+                    "If debtor pays sum"
+                ],
+                answer: "Upon transmission to another officer for execution"
+            },
+            {
+                question: "Who is responsible for payment of process charges in execution?",
+                options: [
+                    "Certificate debtor only",
+                    "Certificate-holder",
+                    "As directed by rules and procedure",
+                    "Civil Court"
+                ],
+                answer: "As directed by rules and procedure"
+            },
+            {
+                question: "What property of certificate debtor, held by another person in trust, is liable for attachment?",
+                options: [
+                    "None",
+                    "Property held on behalf, intended for debtor's benefit",
+                    "Only debtor's business assets",
+                    "Trust property never liable"
+                ],
+                answer: "Property held on behalf, intended for debtor's benefit"
+            },
+            {
+                question: "The Board of Revenue may amend which Schedule of the Act?",
+                options: [
+                    "Schedule I",
+                    "Schedule II",
+                    "Schedule III",
+                    "Schedule IV"
+                ],
+                answer: "Schedule II"
+            },
+            {
+                question: "After collecting assets in execution, who receives the first payment?",
+                options: [
+                    "Certificate-holder (costs incurred)",
+                    "Certificate debtor",
+                    "State of Bihar",
+                    "Purchaser"
+                ],
+                answer: "Certificate-holder (costs incurred)"
+            },
+            {
+                question: "For partial exemption of agricultural produce, the State Government may declare:",
+                options: [
+                    "All produce exempt",
+                    "Exemption up to amount needed for cultivation/support until next harvest",
+                    "No exemptions possible",
+                    "Only seeds exempt"
+                ],
+                answer: "Exemption up to amount needed for cultivation/support until next harvest"
+            },
+            {
+                question: "A person obstructed in obtaining possession as purchaser may apply to:",
+                options: [
+                    "Civil Court",
+                    "Certificate Officer",
+                    "Collector",
+                    "State Government"
+                ],
+                answer: "Certificate Officer"
+            },
+            {
+                question: "Order dismissing purchaser's application regarding resistance by bona fide claimant is:",
+                options: [
+                    "Conclusive, subject to suit in civil court",
+                    "Never final",
+                    "Not reviewable",
+                    "Automatically reversed"
+                ],
+                answer: "Conclusive, subject to suit in civil court"
+            },
+            {
+                question: "On what ground may a purchaser apply to set aside the sale?",
+                options: [
+                    "Certificate debtor had no saleable interest in property",
+                    "Mistake in purchase amount",
+                    "Delay in transfer",
+                    "All of the above"
+                ],
+                answer: "Certificate debtor had no saleable interest in property"
+            },
+            {
+                question: "Mandatory appeal deposit for certificate debtor (for revision/appeal) is:",
+                options: [
+                    "Entire certificate dues",
+                    "40% of certificate dues or admitted due, whichever is higher",
+                    "Nominal fee",
+                    "None"
+                ],
+                answer: "40% of certificate dues or admitted due, whichever is higher"
+            },
+            {
+                question: "Maximum detention in prison for any amount less than fifty rupees:",
+                options: [
+                    "3 months",
+                    "6 weeks",
+                    "1 year",
+                    "6 months"
+                ],
+                answer: "6 weeks"
+            },
+            {
+                question: "For which classes of property is no new notice required upon transfer for execution?",
+                options: [
+                    "Immovable property only",
+                    "On every execution",
+                    "When certificate is transmitted to authority for execution",
+                    "No property"
+                ],
+                answer: "When certificate is transmitted to authority for execution"
+            },
+            {
+                question: "Certificate Officer acts as what for certain legal purposes?",
+                options: [
+                    "Tax collector",
+                    "Police officer",
+                    "Civil Court",
+                    "Revenue Inspector"
+                ],
+                answer: "Civil Court"
+            },
+            {
+                question: "On certificate debtor's death, property in the hands of his son is deemed property of deceased if:",
+                options: [
+                    "Not disposed of",
+                    "Liable under Hindu law",
+                    "Both of the above",
+                    "Never deemed so"
+                ],
+                answer: "Both of the above"
+            },
+            {
+                question: "Which Section provides for restitution if an order is reversed/modified on appeal?",
+                options: [
+                    "Section 55A",
+                    "Section 41",
+                    "Section 22",
+                    "Section 33"
+                ],
+                answer: "Section 55A"
+            },
+            {
+                question: "Limitation on Civil Court's powers: Civil suit is only permitted:",
+                options: [
+                    "If expressly allowed, or on ground of fraud",
+                    "For any execution order",
+                    "For cost disputes",
+                    "Whenever debtor wishes"
+                ],
+                answer: "If expressly allowed, or on ground of fraud"
+            },
+            {
+                question: "What is the role of the Certificate Officer in evidence and witness production?",
+                options: [
+                    "None",
+                    "Same powers as Civil Court for evidence and witnesses",
+                    "Submits report to District Court",
+                    "Supervises police only"
+                ],
+                answer: "Same powers as Civil Court for evidence and witnesses"
+            },
+            {
+                question: "How are rules under the Act published?",
+                options: [
+                    "By press note",
+                    "In Official Gazette, effective from date specified",
+                    "Announcement in revenue office",
+                    "None"
+                ],
+                answer: "In Official Gazette, effective from date specified"
+            },
+            {
+                question: "If the certificate debtor pays due amount within 90 days after sale, what is the result?",
+                options: [
+                    "Sale is confirmed",
+                    "Sale is set aside",
+                    "Sale becomes void",
+                    "None"
+                ],
+                answer: "Sale is set aside"
+            },
+            {
+                question: "The Act makes provision for the application of which law for limitation?",
+                options: [
+                    "Limitation Act, 1963",
+                    "Bihar Tenancy Act",
+                    "Criminal Procedure Code",
+                    "None"
+                ],
+                answer: "Limitation Act, 1963"
+            },
+            {
+                question: "What protection applies to Certificate Officers under this Act?",
+                options: [
+                    "No special protection",
+                    "Protection under Judicial Officers' Protection Act, 1850",
+                    "Only police protection",
+                    "None"
+                ],
+                answer: "Protection under Judicial Officers' Protection Act, 1850"
+            },
+            {
+                question: "Entry into a dwelling house for process execution is prohibited:",
+                options: [
+                    "After sunset and before sunrise",
+                    "At any time",
+                    "Only with Collector's order",
+                    "None"
+                ],
+                answer: "After sunset and before sunrise"
+            },
+            {
+                question: "Number of appeals permitted after Collector's order:",
+                options: [
+                    "One",
+                    "Two (including revision)",
+                    "Unlimited",
+                    "Three"
+                ],
+                answer: "One"
+            },
+            {
+                question: "During investigation of a claim to property, Certificate Officer may:",
+                options: [
+                    "Postpone sale pending investigation",
+                    "Not postpone under any circumstances",
+                    "Cancel sale immediately",
+                    "Always attach property"
+                ],
+                "answer": "Postpone sale pending investigation"
+            },
+            {
+                question: "Detention in prison under Section 40 can be ended upon:",
+                options: [
+                    "Payment of warrant amount",
+                    "Satisfaction or cancellation of certificate",
+                    "On request by certificate-holder",
+                    "All of the above"
+                ],
+                answer: "All of the above"
+            },
+            {
+                question: "Which cannot be attached for satisfaction of certificate?",
+                options: [
+                    "Stipends to government pensioners",
+                    "Bonds",
+                    "Money received for debtor's services",
+                    "Shares in corporation"
+                ],
+                answer: "Stipends to government pensioners"
+            },
+            {
+                question: "What is NOT grounds for review of order by Certificate Officer?",
+                options: [
+                    "Mistake in certificate",
+                    "Mistake in proceedings",
+                    "Review without notice to interested parties",
+                    "Error in process"
+                ],
+                answer: "Review without notice to interested parties"
+            },
+            {
+                question: "Application to set aside a sale on ground of non-service of notice or irregularity must be made within:",
+                options: [
+                    "30 days",
+                    "90 days",
+                    "60 days",
+                    "7 days"
+                ],
+                answer: "60 days"
+            },
+            {
+                question: "Orders granting/disallowing claims to property in execution can be challenged by:",
+                options: [
+                    "Appeal to Commissioner",
+                    "Suit in Civil Court",
+                    "No challenge possible",
+                    "Application to Collector"
+                ],
+                answer: "Suit in Civil Court"
+            },
+            {
+                question: "In execution, which costs are recoverable?",
+                options: [
+                    "Only process charges",
+                    "Interest, costs, charges as listed in Section 17",
+                    "No costs",
+                    "Only interest"
+                ],
+                answer: "Interest, costs, charges as listed in Section 17"
+            },
+            {
+                question: "Appeals against Certificate Officer orders (not being Collector) are made to:",
+                options: [
+                    "Collector",
+                    "Board of Revenue",
+                    "State Government",
+                    "Civil Court"
+                ],
+                answer: "Collector"
+            },
+            {
+                question: "Applicability of Act to suits, appeals under Limitation Act:",
+                options: [
+                    "Sections 6-9 of Limitation Act apply",
+                    "Sections 6-9 do NOT apply",
+                    "All Limitation Act applies",
+                    "Not specified"
+                ],
+                answer: "Sections 6-9 do NOT apply"
+            },
+            {
+                question: "What must a certificate debtor do to have a sale set aside under irregularity or lack of notice?",
+                options: [
+                    "Prove substantial injury",
+                    "Pay amount found due before order",
+                    "Apply within 60 days",
+                    "All of the above"
+                ],
+                answer: "All of the above"
+            },
+            {
+                question: "Who orders the release of a certificate debtor from arrest on grounds of ill health?",
+                options: [
+                    "Collector or Certificate Officer",
+                    "Civil Court alone",
+                    "State Government",
+                    "Police"
+                ],
+                answer: "Collector or Certificate Officer"
+            },
+            {
+                question: "Which officer may be empowered to authorize ministerial officers for documents?",
+                options: [
+                    "Certificate Officer",
+                    "Commissioner",
+                    "Collector",
+                    "State Government"
+                ],
+                answer: "State Government"
+            },
+            {
+                question: "All certificate officers (not Collectors), Assistant Collectors, and Deputy Collectors are subject to:",
+                options: [
+                    "Board of Revenue",
+                    "Collector's general supervision",
+                    "State Government only",
+                    "None"
+                ],
+                answer: "Collector's general supervision"
+            },
+            {
+                question: "In execution, debts owed to certificate debtor can be attached unless:",
+                options: [
+                    "Excluded by law",
+                    "Are stipends and gratuities as per Act",
+                    "Debtor is government official",
+                    "Debtor protests"
+                ],
+                answer: "Are stipends and gratuities as per Act"
+            },
+            {
+                question: "What is one result of not serving notice as per Section 7?",
+                options: [
+                    "Sale is voidable by suit within 1 year after possession",
+                    "No effect on sale",
+                    "Certificate cancelled",
+                    "None"
+                ],
+                answer: "Sale is voidable by suit within 1 year after possession"
+            },
+            {
+                question: "Person other than certificate debtor removed from possession by purchaser may:",
+                options: [
+                    "Seek restoration from Certificate Officer",
+                    "Not seek remedy",
+                    "Appeal to High Court",
+                    "Request police only"
+                ],
+                answer: "Seek restoration from Certificate Officer"
+            },
+            {
+                question: "Orders regarding possession passed by Certificate Officer are:",
+                options: [
+                    "Final but subject to suit in Civil Court",
+                    "Never conclusive",
+                    "Automatically reversed after 3 months",
+                    "Not legally binding"
+                ],
+                answer: "Final but subject to suit in Civil Court"
+            },
+            {
+                question: "Attachment of salary of public officers is permitted only:",
+                options: [
+                    "As per scales and exemptions in the Act",
+                    "Without restriction",
+                    "With High Court permission",
+                    "After 12 months of default"
+                ],
+                answer: "As per scales and exemptions in the Act"
+            },
+            {
+                question: "If the certificate is executed against the legal representative of a deceased debtor, liability is:",
+                options: [
+                    "Only to extent of property received from deceased not duly disposed of",
+                    "Unlimited",
+                    "Absent",
+                    "As per demand in certificate"
+                ],
+                answer: "Only to extent of property received from deceased not duly disposed of"
+            }
+        ];
+
+        // Get DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const quizCompletedScreen = document.getElementById('quiz-completed-screen');
+        const questionCounter = document.getElementById('question-counter');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const resultMessage = document.getElementById('result-message');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const finalScore = document.getElementById('final-score');
+        const restartQuizBtn = document.getElementById('restart-quiz-btn');
+
+        // Quiz state variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+        let showResult = false;
+
+        /**
+         * Renders the current question and its options.
+         */
+        function renderQuestion() {
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+            questionText.textContent = currentQuestion.question;
+            optionsContainer.innerHTML = ''; // Clear previous options
+            resultMessage.classList.add('hidden'); // Hide result message
+            nextQuestionBtn.disabled = true; // Disable next button initially
+            nextQuestionBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+            nextQuestionBtn.classList.add('bg-blue-400', 'cursor-not-allowed');
+            selectedAnswer = null;
+            showResult = false;
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add(
+                    'w-full', 'text-left', 'p-3', 'rounded-md', 'border-2', 'transition-all', 'duration-200',
+                    'bg-gray-50', 'border-gray-300', 'hover:bg-gray-100', 'cursor-pointer', 'font-medium', 'text-gray-800'
+                );
+                button.onclick = () => handleAnswerSelect(option, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        /**
+         * Handles the selection of an answer.
+         * @param {string} option - The selected answer option.
+         * @param {HTMLElement} clickedButton - The button element that was clicked.
+         */
+        function handleAnswerSelect(option, clickedButton) {
+            if (showResult) return; // Prevent multiple selections
+
+            selectedAnswer = option;
+            showResult = true;
+            nextQuestionBtn.disabled = false; // Enable next button
+            nextQuestionBtn.classList.remove('bg-blue-400', 'cursor-not-allowed');
+            nextQuestionBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+
+            // Disable all option buttons after selection
+            Array.from(optionsContainer.children).forEach(button => {
+                button.disabled = true;
+                button.classList.remove('hover:bg-gray-100', 'cursor-pointer');
+                button.classList.add('cursor-not-allowed');
+            });
+
+            // Show result message and apply styling
+            resultMessage.classList.remove('hidden');
+            if (selectedAnswer === quizQuestions[currentQuestionIndex].answer) {
+                score++;
+                resultMessage.classList.remove('bg-red-100', 'text-red-700');
+                resultMessage.classList.add('bg-green-100', 'text-green-700');
+                resultMessage.textContent = 'Correct!';
+                clickedButton.classList.remove('bg-gray-50', 'border-gray-300');
+                clickedButton.classList.add('bg-green-200', 'border-green-500');
+            } else {
+                resultMessage.classList.remove('bg-green-100', 'text-green-700');
+                resultMessage.classList.add('bg-red-100', 'text-red-700');
+                resultMessage.textContent = `Incorrect. The correct answer was: ${quizQuestions[currentQuestionIndex].answer}`;
+                clickedButton.classList.remove('bg-gray-50', 'border-gray-300');
+                clickedButton.classList.add('bg-red-200', 'border-red-500');
+
+                // Highlight the correct answer
+                Array.from(optionsContainer.children).forEach(button => {
+                    if (button.textContent === quizQuestions[currentQuestionIndex].answer) {
+                        button.classList.remove('bg-gray-50', 'border-gray-300');
+                        button.classList.add('border-green-500', 'bg-green-100');
+                    }
+                });
+            }
+
+            // Update button text for "Finish Quiz" if it's the last question
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextQuestionBtn.textContent = 'Finish Quiz';
+            }
+        }
+
+        /**
+         * Navigates to the next question or finishes the quiz.
+         */
+        function handleNextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else {
+                showQuizCompletedScreen();
+            }
+        }
+
+        /**
+         * Displays the quiz completed screen with the final score.
+         */
+        function showQuizCompletedScreen() {
+            quizContainer.classList.add('hidden');
+            quizCompletedScreen.classList.remove('hidden');
+            finalScore.textContent = `You scored ${score} out of ${quizQuestions.length} questions.`;
+        }
+
+        /**
+         * Restarts the quiz from the beginning.
+         */
+        function handleRestartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+            showResult = false;
+            quizCompletedScreen.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            nextQuestionBtn.textContent = 'Next Question'; // Reset button text
+            renderQuestion();
+        }
+
+        // Event listeners
+        nextQuestionBtn.addEventListener('click', handleNextQuestion);
+        restartQuizBtn.addEventListener('click', handleRestartQuiz);
+
+        // Initial render when the page loads
+        window.onload = renderQuestion;
+    </script>
+</body>
+</html>
